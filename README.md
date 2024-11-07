@@ -325,11 +325,6 @@ Made with [Deno](https://deno.com/) 🦕,
 [OpenAI's Client for Deno](https://github.com/openai/openai-deno-build) 🤖 this
 little code dump is more of a playground to get the hang of Deno and Ink.
 
-In order to run this code, you need:
-
-- an API key for OpenAI and some credits
-- Deno v2.0.0 or higher installed
-
 ## Ideas/Todos/Wishlist
 
 - [ ] write a Dockerfile Readme about how to run the project in a container

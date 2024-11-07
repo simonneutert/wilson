@@ -1,0 +1,44 @@
+{
+  "assistant": {
+    "id": "",
+    "name": "Name of the ASSISTANT",
+    "instruction": "HERE SHOULD BE THE INSTRUCTION FOR THE ASSISTANT.",
+    "threads": [
+      "REPLACE THIS A LIST OF THREADS THE ASSISTANT SHOULD RUN THROUGH ONE AFTER ANOTHER."
+    ]
+  },
+  "recipe": [
+    {
+      "attr": "uniqueAttributeNameForASelectInput",
+      "inputType": "select",
+      "details": {
+        "selectOptions": [
+          {
+            "label": "a1",
+            "value": "a1"
+          },
+          {
+            "label": "b1",
+            "value": "b1"
+          },
+          {
+            "label": "c1",
+            "value": "c1"
+          }
+        ],
+        "defaultValue": "IF A DEFAULT VALUE MAKES SENSE, PUT IT HERE, BUT EMPTY STRING IS ABSOLUTELY FINE.",
+        "text": "PLACE THE COMMAND FOR THE USER INTERACTION HERE.",
+        "summaryText": "THIS FIELD WILL BE USED TO ADD CONTEXT TO THE USER'S RESPONSE."
+      }
+    },
+    {
+      "attr": "uniqueAttributeNameForAnInput",
+      "inputType": "input",
+      "details": {
+        "defaultValue": "",
+        "text": "PLACE THE COMMAND FOR THE USER INTERACTION HERE.",
+        "summaryText": "THIS FIELD WILL BE USED TO ADD CONTEXT TO THE USER'S RESPONSE."
+      }
+    }
+  ]
+}

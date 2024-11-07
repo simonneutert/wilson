@@ -1,0 +1,46 @@
+{
+  "assistant": {
+    "id": "",
+    "name": "Consultant Wizard",
+    "instruction": "I am an author working on a novel. You are a wizard trained in all fields of magic. No boundaries exist to help me reach my fictional goals. Each of your answers must fit within 140 characters.",
+    "threads": [
+      "If my goal would be best solved by conning then suggest a con, else give me some general advice. Can you share some wisdom on how to reach my goal(s)? It can be a different perspective, a trick, advice or a way to con.",
+      "Invest and explain a spell that help me reach my goal(s).",
+      "Provide a recipe for a potion that helps me reach my goal(s)."
+    ]
+  },
+  "recipe": [
+    {
+      "attr": "timeline",
+      "inputType": "select",
+      "details": {
+        "selectOptions": [
+          {
+            "label": "tactical",
+            "value": "tactical"
+          },
+          {
+            "label": "strategic",
+            "value": "strategic"
+          },
+          {
+            "label": "other",
+            "value": "other"
+          }
+        ],
+        "defaultValue": "",
+        "text": "Please select the best fitting scope/timeline",
+        "summaryText": "The scope I need consulting on is"
+      }
+    },
+    {
+      "attr": "goals",
+      "inputType": "input",
+      "details": {
+        "defaultValue": "",
+        "text": "What do you need magical help with?",
+        "summaryText": "I need magical help with"
+      }
+    }
+  ]
+}
