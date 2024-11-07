@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "run": "deno run --allow-read --allow-write --allow-net --allow-env --allow-run main.jsx",
+    "replay": "deno run --allow-read --allow-write --allow-net --allow-env --allow-run lib/replay_assistant.js",
+    "create-assistant": "deno run --allow-read --allow-write --allow-net --allow-env --allow-run lib/create_assistant.jsx"
+  },
+  "imports": {
+    "@std/fs": "jsr:@std/fs@^1.0.5"
+  }
+}

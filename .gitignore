@@ -1,0 +1,21 @@
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Node
+node_modules/
+
+.vscode/
+.env
+dist/**/*
+
+# Assistant data
+assistants/*.json
+!assistants/template-inception.json
+assistants/replays
+
+# .gitkeeps
+!dist/.gitkeep
+!assistants/replays/.gitkeep
