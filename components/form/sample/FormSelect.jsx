@@ -1,6 +1,6 @@
-import React from "npm:react";
-import { Box, Newline, Text } from "npm:ink";
-import { Select } from "npm:@inkjs/ui";
+import React from "react";
+import { Box, Newline, Text } from "ink";
+import { Select } from "@inkjs/ui";
 import { ProceedRenderer } from "./ProceedRenderer.jsx";
 
 export const FormSelect = (props) => {

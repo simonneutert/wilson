@@ -1,6 +1,6 @@
-import React, { useState } from "npm:react";
-import { Box, Text } from "npm:ink";
-import { TextInput } from "npm:@inkjs/ui";
+import React, { useState } from "react";
+import { Box, Text } from "ink";
+import { TextInput } from "@inkjs/ui";
 import { ProceedRenderer } from "./ProceedRenderer.jsx";
 import { WizSummary } from "./WizSummary.jsx";
 

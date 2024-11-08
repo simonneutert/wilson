@@ -1,5 +1,5 @@
-import React from "npm:react";
-import { render } from "npm:ink";
+import React from "react";
+import { render } from "ink";
 
 import { FormInput } from "./components/form/sample/FormInput.jsx";
 import { FormSelect } from "./components/form/sample/FormSelect.jsx";
