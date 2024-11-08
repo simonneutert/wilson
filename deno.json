@@ -5,6 +5,11 @@
     "create-assistant": "deno run --allow-read --allow-write --allow-net --allow-env --allow-run lib/create_assistant.jsx"
   },
   "imports": {
-    "@std/fs": "jsr:@std/fs@^1.0.5"
+    "@std/fs": "jsr:@std/fs@^1.0.5",
+    "ink-spinner": "npm:ink-spinner@^5.0.0",
+    "ink": "npm:ink@^5.0.0",
+    "react": "npm:react@^18.3.1",
+    "@inkjs/ui": "npm:@inkjs/ui@^2.0.0",
+    "openai": "npm:openai@^4.71.1"
   }
 }

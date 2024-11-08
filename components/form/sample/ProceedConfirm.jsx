@@ -1,6 +1,6 @@
-import React from "npm:react";
-import { Box } from "npm:ink";
-import { ConfirmInput } from "npm:@inkjs/ui";
+import React from "react";
+import { Box } from "ink";
+import { ConfirmInput } from "@inkjs/ui";
 import { Renderer } from "./Renderer.jsx";
 import { EmptyLine } from "./EmptyLine.jsx";
 import { WizSummary } from "./WizSummary.jsx";

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "npm:react";
-import { Text, useApp } from "npm:ink";
+import React, { useEffect, useState } from "react";
+import { Text, useApp } from "ink";
+import Spinner from "ink-spinner";
+
 import { Assistant } from "../../../lib/assistant.js";
 
 export function WizAnswer(props) {
-  const [answer, setAnswer] = useState("Loading ... please stand by!");
+  const [answer, setAnswer] = useState("");
   const { exit } = useApp();
 
   const wizAnswers = { ...props.answers };
@@ -27,5 +29,20 @@ export function WizAnswer(props) {
     });
   }, []);
 
+  if (!answer) {
+    return <LoadingWithSpinner />;
+  }
+
   return <Text>{answer}</Text>;
+}
+
+function LoadingWithSpinner() {
+  return (
+    <Text>
+      <Text color="green">
+        <Spinner type="dots" />
+      </Text>
+      {" The assistant is coming up with answers ... please stand by!"}
+    </Text>
+  );
 }

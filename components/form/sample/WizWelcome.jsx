@@ -1,5 +1,5 @@
-import React from "npm:react";
-import { Box, Newline, Text } from "npm:ink";
+import React from "react";
+import { Box, Newline, Text } from "ink";
 
 export function WizWelcome(props) {
   const recipe = props.recipe;
