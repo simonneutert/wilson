@@ -338,6 +338,13 @@ little code dump is more of a playground to get the hang of Deno and Ink.
 - [ ] save the conversation to a file
 - [ ] when continuing development, add a CHANGELOG.md
 
+---
+
+Wilson - The Game?
+
+- [ ] [prompts](https://github.com/terkelg/prompts)
+- [ ] read a bit more about [inkjs](https://github.com/y-lohse/inkjs)
+
 ### Developer README
 
 See the [Developer README](./README.DEVELOPER.md) for more information.
