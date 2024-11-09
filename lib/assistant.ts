@@ -17,9 +17,11 @@ export class Assistant {
     this.allProps = props;
     this.baseData = props.baseData;
     this.assistant = props.assistant;
-    this.client = new OpenAI({
-      apiKey: Deno.env.get("OPENAI_API_KEY"),
-    });
+    const apiKey = Deno.env.get("OPENAI_API_KEY");
+    if (!apiKey) {
+      throw new Error("OPENAI_API_KEY environment variable is not set");
+    }
+    this.client = new OpenAI({ apiKey });
     this.assistantLoader = new AssistantLoader(
       this.client,
       this.assistant,
@@ -60,69 +62,76 @@ export class Assistant {
   }
 
   async apiCallback(options: WilsonOptions): Promise<string> {
-    // load or create assistant
-    const assistant = await this.assistantLoader.getOrCreateOpenAiAssistant(
-      { ...this.allProps },
-    );
-    this.assistant.id = assistant.id;
-    // write replay file
-    this.assistantWriter.writeRecipeReplayFile(
-      this.baseData,
-      this.assistant,
-      options,
-    );
-    // create first thread for the assistant
-    const thread = await this.client.beta.threads.create({
-      messages: [
-        {
-          role: "user",
-          content: this.baseData.join("\n"),
-        },
-        {
-          role: "user",
-          content: this.assistant.threads.shift(),
-        },
-      ],
-    } as OpenAI.Beta.Threads.ThreadCreateParams);
-    // poll first thread
-    let run = await this.client.beta.threads.runs.createAndPoll(thread.id, {
-      assistant_id: assistant.id,
-    });
-
-    // forEach will break the async surrounding the loop 🤷‍♂️
-    for (const element of this.assistant.threads) {
-      await this.client.beta.threads.messages.create(thread.id, {
-        role: "user",
-        content: element,
-      });
-
-      run = await this.client.beta.threads.runs.createAndPoll(thread.id, {
+    try {
+      // load or create assistant
+      const assistant = await this.assistantLoader.getOrCreateOpenAiAssistant(
+        { ...this.allProps },
+      );
+      this.assistant.id = assistant.id;
+      // write replay file
+      this.assistantWriter.writeRecipeReplayFile(
+        this.baseData,
+        this.assistant,
+        options,
+      );
+      // create first thread for the assistant
+      const thread = await this.client.beta.threads.create({
+        messages: [
+          {
+            role: "user",
+            content: this.baseData.join("\n"),
+          },
+          {
+            role: "user",
+            content: this.assistant.threads.shift(),
+          },
+        ],
+      } as OpenAI.Beta.Threads.ThreadCreateParams);
+      // poll first thread
+      let run = await this.client.beta.threads.runs.createAndPoll(thread.id, {
         assistant_id: assistant.id,
       });
-    }
 
-    // collect assistant messages
-    let assistantMessages = "";
-    const assistantMessagesCollection: string[] = [];
-    if (run.status == "completed") {
-      const messages = await this.client.beta.threads.messages.list(thread.id);
-      const paginatedMessages = messages.getPaginatedItems();
-      for (const message of paginatedMessages) {
-        if (message.role == "assistant") {
-          const content = message.content[0];
-          if (guards.isTextContentBlock(content)) {
-            assistantMessagesCollection.push(content.text.value);
+      // forEach will break the async surrounding the loop 🤷‍♂️
+      for (const element of this.assistant.threads) {
+        await this.client.beta.threads.messages.create(thread.id, {
+          role: "user",
+          content: element,
+        });
+
+        run = await this.client.beta.threads.runs.createAndPoll(thread.id, {
+          assistant_id: assistant.id,
+        });
+      }
+
+      // collect assistant messages
+      let assistantMessages = "";
+      const assistantMessagesCollection: string[] = [];
+      if (run.status == "completed") {
+        const messages = await this.client.beta.threads.messages.list(
+          thread.id,
+        );
+        const paginatedMessages = messages.getPaginatedItems();
+        for (const message of paginatedMessages) {
+          if (message.role == "assistant") {
+            const content = message.content[0];
+            if (guards.isTextContentBlock(content)) {
+              assistantMessagesCollection.push(content.text.value);
+            }
           }
         }
+        assistantMessages = assistantMessagesCollection.reverse().join(
+          "\n\n---\n\n",
+        );
+      } else {
+        assistantMessages =
+          `Sorry, something went wrong. Please try again later. Run status: ${run.status}`;
       }
-      assistantMessages = assistantMessagesCollection.reverse().join(
-        "\n\n---\n\n",
-      );
-    } else {
-      assistantMessages =
-        `Sorry, something went wrong. Please try again later. Run status: ${run.status}`;
+      return assistantMessages;
+    } catch (error) {
+      console.error("Error in apiCallback:", error);
+      return "An error occurred while processing your request.";
     }
-    return assistantMessages;
   }
 
   /** Sanitize a string for use in filenames. */
@@ -162,7 +171,7 @@ export interface WilsonTemplateFromInk extends WilsonTemplate {
   baseData: string[];
 }
 
-export interface WilsonForm {
+interface WilsonForm {
   attr: string;
   inputType: WilsonInputType;
   details: WilsonSelectInputDetails | WilsonTextInputDetails;
@@ -177,20 +186,17 @@ export interface WilsonOptions {
   filename?: string;
 }
 
-export interface WilsonSelectInputDetails {
+interface WilsonSelectInputDetails {
   selectOptions: WilsonSelectOption[];
   defaultValue: string;
   text: string;
   summaryText: string;
 }
 
-export interface WilsonTextInputDetails {
+interface WilsonTextInputDetails {
   attr: string;
   inputType: WilsonInputType;
   details: WilsonTextInputDetails;
 }
 
-export enum WilsonInputType {
-  select = "select",
-  input = "input",
-}
+type WilsonInputType = "select" | "input";
