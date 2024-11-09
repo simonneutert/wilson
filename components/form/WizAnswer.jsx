@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text, useApp } from "ink";
 import Spinner from "ink-spinner";
-import { Assistant } from "../../../lib/assistant.ts";
+import { Assistant } from "../../lib/assistant.ts";
 
 export function WizAnswer(props) {
   const [answer, setAnswer] = useState("");
