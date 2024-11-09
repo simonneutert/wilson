@@ -7,12 +7,12 @@ import { WizSummary } from "./WizSummary.jsx";
 import { DoYouWantToProceed } from "./DoYouWantToProceed.jsx";
 
 export const ProceedConfirm = (props) => {
-  const xprevProps = props.prevProps;
-
   const wizProps = {
-    ...xprevProps,
+    ...props.prevProps,
     sampleProp: props.sampleProp,
   };
+  wizProps.config.defaultValue = props.sampleProp;
+
   return (
     <Box flexDirection="column" gap={1}>
       <WizSummary wizProps={wizProps} />
@@ -21,7 +21,7 @@ export const ProceedConfirm = (props) => {
       <DoYouWantToProceed />
       <ConfirmInput
         onConfirm={() => {
-          const prevProps = { ...xprevProps };
+          const prevProps = { ...props.prevProps };
           prevProps.keyCount = prevProps.keyCount + 1;
           prevProps.prevProps = prevProps.prevProps || {};
           prevProps.prevProps[prevProps.attr] = props.sampleProp;

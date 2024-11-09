@@ -7,22 +7,22 @@ run file="assistants/templates/demo.json":
 replay file:
 	@deno task replay {{file}}
 
-create_assistant:
+create-assistant:
 	@deno task create-assistant
 
-clean_assistant_files:
+clean-assistant-files:
 	rm -rf assistants/assistant_*.json
 	rm -rf assistants/replays
 	mkdir assistants/replays && touch assistants/replays/.gitkeep
 
-vhs_record:
+vhs-record:
 	@just compile
 	@vhs demo.tape
 
 compile:
 	@deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson main.jsx
-	@deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson-replay lib/replay_assistant.js
-	@deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson-create-assistant lib/create_assistant.jsx
+	@deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson-replay lib/replay-assistant.ts
+	@deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson-create-assistant lib/create-assistant.jsx
 
-publish_ghcr:
+publish-ghcr:
 	docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/simonneutert/wilson:main --push .    
