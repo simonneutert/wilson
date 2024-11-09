@@ -13,13 +13,13 @@ Here you will find information for developers contributing to the project.
 
 To update the VHS demo, run the following command:
 
-`$ just vhs_record`
+`$ just vhs-record`
 
 ## Publish Package on GHCR.io
 
 Publish the package on GHCR.io using the following command:
 
-`$ just publish_ghcr`
+`$ just publish-ghcr`
 
 ## Run the project
 
@@ -44,7 +44,7 @@ executable on your system:
       "request": "launch",
       "name": "Launch Program",
       "type": "node",
-      "program": "${workspaceFolder}/lib/replay_assistant.js",
+      "program": "${workspaceFolder}/lib/replay-assistant.ts",
       "cwd": "${workspaceFolder}",
       "env": {},
       "runtimeExecutable": "/path/to/bin/deno",

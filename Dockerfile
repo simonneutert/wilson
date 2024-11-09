@@ -11,8 +11,8 @@ COPY assistants/templates /app/assistants/templates
 
 # Compile the code to /app/dist
 RUN deno compile --allow-net --allow-env --allow-read --allow-run --allow-write --output dist/wilson main.jsx
-RUN deno compile --allow-net --allow-env --allow-read --allow-run --allow-write --output dist/wilson-replay lib/replay_assistant.js
-RUN deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson-create-assistant lib/create_assistant.jsx
+RUN deno compile --allow-net --allow-env --allow-read --allow-run --allow-write --output dist/wilson-replay lib/replay-assistant.ts
+RUN deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson-create-assistant lib/create-assistant.jsx
 
 FROM denoland/deno:2.0.5
 

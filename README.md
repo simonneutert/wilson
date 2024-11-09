@@ -139,7 +139,7 @@ Currently there's no programmatic way to create your own assistant. 🙃
 
 `$ just compile` then `$ ./dist/wilson-create-assistant`
 
-`$ just create_assistant` OR `$ deno task create-assistant`
+`$ just create-assistant` OR `$ deno task create-assistant`
 
 Glimpse into
 [assistants/template-inception.json](./assistants/template-inception.json) file
