@@ -5,55 +5,6 @@ import { AssistantWriter } from "./helpers/assistant-writer.ts";
 import writeJsonFile from "./helpers/write-json-file-formatted.ts";
 import * as guards from "./helpers/guards.ts";
 
-export interface WilsonAssistant {
-  id: string;
-  name: string;
-  instruction: string;
-  threads: string[];
-}
-
-export interface WilsonTemplate {
-  assistant: WilsonAssistant;
-  recipe: WilsonForm[];
-}
-
-export interface WilsonTemplateFromInk extends WilsonTemplate {
-  baseData: string[];
-}
-
-export interface WilsonForm {
-  attr: string;
-  inputType: WilsonInputType;
-  details: WilsonSelectInputDetails | WilsonTextInputDetails;
-}
-
-export interface WilsonSelectOption {
-  value: string;
-  label: string;
-}
-
-export interface WilsonOptions {
-  filename?: string;
-}
-
-export interface WilsonSelectInputDetails {
-  selectOptions: WilsonSelectOption[];
-  defaultValue: string;
-  text: string;
-  summaryText: string;
-}
-
-export interface WilsonTextInputDetails {
-  attr: string;
-  inputType: WilsonInputType;
-  details: WilsonTextInputDetails;
-}
-
-export enum WilsonInputType {
-  select = "select",
-  input = "input",
-}
-
 export class Assistant {
   allProps: WilsonTemplate;
   baseData: string[];
@@ -193,4 +144,53 @@ export class Assistant {
     );
     console.log("\n\n\n-----------------------------------\n\n\n");
   }
+}
+
+export interface WilsonAssistant {
+  id: string;
+  name: string;
+  instruction: string;
+  threads: string[];
+}
+
+export interface WilsonTemplate {
+  assistant: WilsonAssistant;
+  recipe: WilsonForm[];
+}
+
+export interface WilsonTemplateFromInk extends WilsonTemplate {
+  baseData: string[];
+}
+
+export interface WilsonForm {
+  attr: string;
+  inputType: WilsonInputType;
+  details: WilsonSelectInputDetails | WilsonTextInputDetails;
+}
+
+export interface WilsonSelectOption {
+  value: string;
+  label: string;
+}
+
+export interface WilsonOptions {
+  filename?: string;
+}
+
+export interface WilsonSelectInputDetails {
+  selectOptions: WilsonSelectOption[];
+  defaultValue: string;
+  text: string;
+  summaryText: string;
+}
+
+export interface WilsonTextInputDetails {
+  attr: string;
+  inputType: WilsonInputType;
+  details: WilsonTextInputDetails;
+}
+
+export enum WilsonInputType {
+  select = "select",
+  input = "input",
 }
