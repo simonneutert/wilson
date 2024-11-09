@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "ink";
 
-import { FormInput } from "../components/form/sample/FormInput.jsx";
-import { FormSelect } from "../components/form/sample/FormSelect.jsx";
-import { WizWelcome } from "../components/form/sample/WizWelcome.jsx";
+import { FormInput } from "../components/form/FormInput.jsx";
+import { FormSelect } from "../components/form/FormSelect.jsx";
+import { WizWelcome } from "../components/form/WizWelcome.jsx";
 
 // here be dragons :)
 
