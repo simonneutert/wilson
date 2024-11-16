@@ -38,6 +38,7 @@ responsibility. 🕷️🦸
 - [Ideas/Todos/Wishlist](#ideastodoswishlist)
   - [Developer README](#developer-readme)
   - [Contributions](#contributions)
+- [Legal Disclaimer](#legal-disclaimer)
 
 ---
 
@@ -360,3 +361,10 @@ I am sure we can work something out. 🤝
 
 It is important to me that we are on the same page and that we can work together
 in a way that is fun and productive for both of us.
+
+## Legal Disclaimer
+
+Wilson is for research and simulation only. Wilson is a research and experimental technology, which relies on Artificial Intelligence (AI) models to generate text  content. The AI system output may include unrealistic, inappropriate, harmful or inaccurate results, including factual errors. You are responsible for reviewing the generated content (and adapting it if necessary) before using it, as you are fully responsible for determining its accuracy and fit for purpose. We advise using Wilson’s outputs for insight generation and not for direct decision-making. Generated outputs do not reflect the opinions of the developers/contributors. You are fully responsible for any use you make of the generated outputs.
+
+ **PROHIBITED USES**:
+Wilson is not intended to simulate sensitive (e.g. violent or sexual) situations. Moreover, outputs must not be used to deliberately deceive, mislead or harm people in any way. You are fully responsible for any use you make and must comply with all applicable laws and regulations.”
