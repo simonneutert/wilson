@@ -6,7 +6,7 @@ import { ProceedRenderer } from "./ProceedRenderer.jsx";
 export const FormSelect = (props) => {
   return (
     <>
-      <Box flexDirection="column" gap={1} borderStyle="round">
+      <Box flexDirection="column" gap={1} padding={2} borderStyle="round">
         <Text>
           <Text>{props.config.text}</Text>
           <Newline />

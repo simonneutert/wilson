@@ -21,6 +21,7 @@ function determineNextStep(props) {
       <FormSelect
         assistant={props.assistant}
         recipe={props.recipe}
+        recipeDataTemplate={props.recipeDataTemplate}
         keyCount={props.keyCount}
         attr={attr}
         prevProps={props.prevProps}
@@ -34,6 +35,7 @@ function determineNextStep(props) {
       <FormInput
         assistant={props.assistant}
         recipe={props.recipe}
+        recipeDataTemplate={props.recipeDataTemplate}
         keyCount={props.keyCount}
         attr={attr}
         prevProps={props.prevProps}

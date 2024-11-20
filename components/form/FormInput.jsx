@@ -6,11 +6,11 @@ import { WizSummary } from "./WizSummary.jsx";
 
 export function FormInput(props) {
   const [value, setValue] = useState(
-    props.sampleProp || props.config.defaultValue || "",
+    props.userInputValue || props.config.defaultValue || "",
   );
 
   return (
-    <Box flexDirection="column" gap={1}>
+    <Box flexDirection="column" gap={1} padding={2} borderStyle="round">
       <WizSummary wizProps={props} />
       <Text>
         {props.config.text}

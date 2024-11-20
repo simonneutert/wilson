@@ -6,6 +6,9 @@ import { FormSelect } from "./components/form/FormSelect.jsx";
 import { WizWelcome } from "./components/form/WizWelcome.jsx";
 
 const filename = Deno.args[0] || "assistants/templates/demo.json";
+// send a copy of the original data through the pipeline
+const recipeDataTemplate = JSON.parse(Deno.readTextFileSync(filename));
+// this will be the data that can and will be mutated
 const recipeData = JSON.parse(Deno.readTextFileSync(filename));
 
 const elemCount = 0;
@@ -15,10 +18,11 @@ const { attr, inputType, details } = start;
 if (inputType === "input") {
   render(
     <>
-      <WizWelcome recipe={recipeData} />
+      <WizWelcome recipe={recipeDataTemplate} />
       <FormInput
         assistant={recipeData.assistant}
         recipe={recipeData.recipe}
+        recipeDataTemplate={recipeDataTemplate}
         keyCount={elemCount}
         attr={attr}
         prevProps={new Object()}
@@ -33,6 +37,7 @@ if (inputType === "input") {
       <FormSelect
         assistant={recipeData.assistant}
         recipe={recipeData.recipe}
+        recipeDataTemplate={recipeDataTemplate}
         keyCount={elemCount}
         attr={attr}
         prevProps={new Object()}

@@ -2,7 +2,6 @@ import OpenAI from "openai";
 import { sanitizeString } from "./helpers/sanitize-string.ts";
 import { AssistantLoader } from "./helpers/assistant-loader.ts";
 import { AssistantWriter } from "./helpers/assistant-writer.ts";
-import writeJsonFile from "./helpers/write-json-file-formatted.ts";
 import * as guards from "./helpers/guards.ts";
 
 export class Assistant {
@@ -29,32 +28,6 @@ export class Assistant {
     this.assistantWriter = new AssistantWriter();
   }
 
-  /** Get or create an OpenAI Assistant. */
-  async persistAiAssistant(
-    assistant: WilsonAssistant,
-  ): Promise<WilsonAssistant> {
-    const newRecipeFilename = `assistants/assistant_${
-      this.sanitizeString(this.assistant.name)
-    }_${new Date().getTime()}.json`;
-
-    this.debugHintNewAssistant(assistant.id, newRecipeFilename);
-    const clonedProps = { ...this.allProps };
-    clonedProps.assistant.id = assistant.id;
-    await writeJsonFile(newRecipeFilename, clonedProps);
-    return assistant;
-  }
-
-  async createOpenAiAssistant(
-    client: OpenAI,
-  ): Promise<OpenAI.Beta.Assistants.Assistant> {
-    return await client.beta.assistants.create({
-      model: "gpt-4o-mini",
-      name: this.assistant.name,
-      instructions: this.assistant.instruction,
-      // tools = [],
-    });
-  }
-
   call(options?: WilsonOptions): Promise<string> {
     options = options || {};
 
@@ -65,7 +38,7 @@ export class Assistant {
     try {
       // load or create assistant
       const assistant = await this.assistantLoader.getOrCreateOpenAiAssistant(
-        { ...this.allProps },
+        { ...this.allProps } as WilsonData,
       );
       this.assistant.id = assistant.id;
       // write replay file
@@ -164,7 +137,14 @@ export interface WilsonAssistant {
 
 export interface WilsonTemplate {
   assistant: WilsonAssistant;
+  baseData: string[];
+}
+
+export interface WilsonData {
+  assistant: WilsonAssistant;
   recipe: WilsonForm[];
+  baseData: string[];
+  recipeDataTemplate: WilsonTemplate;
 }
 
 export interface WilsonTemplateFromInk extends WilsonTemplate {
