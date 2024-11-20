@@ -3,6 +3,14 @@ import { Text, useApp } from "ink";
 import Spinner from "ink-spinner";
 import { Assistant } from "../../lib/assistant.ts";
 
+function formatSummaryText(summaryText) {
+  if (summaryText.endsWith(":")) {
+    return summaryText.slice(0, -1);
+  } else {
+    return summaryText;
+  }
+}
+
 export function WizAnswer(props) {
   const [answer, setAnswer] = useState("");
   const { exit } = useApp();
@@ -15,7 +23,9 @@ export function WizAnswer(props) {
   });
 
   wizAnswers.baseData = wizAnswers.recipe.map((item) => {
-    return `${item.details.summaryText}: ${item.details.formValue}`;
+    return `${
+      formatSummaryText(item.details.summaryText)
+    }: ${item.details.formValue}`;
   });
 
   useEffect(() => {

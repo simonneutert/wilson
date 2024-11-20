@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { sanitizeString } from "./sanitize-string.ts";
 import writeJsonFile from "./write-json-file-formatted.ts";
-import { WilsonAssistant, WilsonTemplate } from "../assistant.ts";
+import { WilsonAssistant, WilsonData, WilsonTemplate } from "../assistant.ts";
 
 export class AssistantLoader {
   client: OpenAI;
@@ -12,10 +12,9 @@ export class AssistantLoader {
   }
 
   /** Get or create an OpenAI Assistant. */
-  async getOrCreateOpenAiAssistant(props: WilsonTemplate) {
+  async getOrCreateOpenAiAssistant(props: WilsonData) {
     if (!this.assistant?.id || this.assistant.id === "") {
-      const assistant = await this
-        .createOpenAiAssistant();
+      const assistant = await this.createOpenAiAssistant();
       this.assistant.id = assistant.id;
       await this.persistAiAssistant(assistant, props);
       return assistant;
@@ -27,16 +26,20 @@ export class AssistantLoader {
   /** Persist the WilsonTemplate to a file. */
   async persistAiAssistant(
     assistant: OpenAI.Beta.Assistants.Assistant | WilsonAssistant,
-    props: WilsonTemplate,
-  ): Promise<WilsonTemplate> {
+    props: WilsonData,
+  ): Promise<WilsonData> {
     const newRecipeFilename = `assistants/assistant_${
       this.sanitizeString(assistant.name)
     }_${new Date().getTime()}.json`;
 
     this.debugHintNewAssistant(assistant.id, newRecipeFilename);
-    const clonedProps = { ...props } as WilsonTemplate;
+    const clonedProps = { ...props } as WilsonData;
+    const clonedPropsDefaultTemplate = {
+      ...props.recipeDataTemplate,
+    } as WilsonTemplate;
     clonedProps.assistant.id = assistant.id;
-    await writeJsonFile(newRecipeFilename, clonedProps);
+    clonedPropsDefaultTemplate.assistant.id = assistant.id;
+    await writeJsonFile(newRecipeFilename, clonedPropsDefaultTemplate);
     return clonedProps;
   }
 

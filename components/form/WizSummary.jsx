@@ -18,9 +18,9 @@ export function WizSummary(props) {
     }
   });
 
-  if (wizProps.sampleProp) {
+  if (wizProps.userInputValue) {
     coll.push(
-      `${wizProps.config.summaryText}: ${wizProps.sampleProp}`,
+      `${wizProps.config.summaryText}: ${wizProps.userInputValue}`,
     );
   }
 
