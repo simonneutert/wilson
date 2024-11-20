@@ -1,7 +1,6 @@
 import OpenAI from "openai";
-import { sanitizeString } from "./sanitize-string.ts";
-import writeJsonFile from "./write-json-file-formatted.ts";
-import { WilsonAssistant, WilsonData, WilsonTemplate } from "../assistant.ts";
+import { WilsonAssistant, WilsonData } from "../assistant.ts";
+import { AssistantWriter } from "./assistant-writer.ts";
 
 export class AssistantLoader {
   client: OpenAI;
@@ -16,31 +15,12 @@ export class AssistantLoader {
     if (!this.assistant?.id || this.assistant.id === "") {
       const assistant = await this.createOpenAiAssistant();
       this.assistant.id = assistant.id;
-      await this.persistAiAssistant(assistant, props);
+      const writer = new AssistantWriter();
+      await writer.persistAiAssistant(assistant, props);
       return assistant;
     } else {
       return this.assistant;
     }
-  }
-
-  /** Persist the WilsonTemplate to a file. */
-  async persistAiAssistant(
-    assistant: OpenAI.Beta.Assistants.Assistant | WilsonAssistant,
-    props: WilsonData,
-  ): Promise<WilsonData> {
-    const newRecipeFilename = `assistants/assistant_${
-      this.sanitizeString(assistant.name)
-    }_${new Date().getTime()}.json`;
-
-    this.debugHintNewAssistant(assistant.id, newRecipeFilename);
-    const clonedProps = { ...props } as WilsonData;
-    const clonedPropsDefaultTemplate = {
-      ...props.recipeDataTemplate,
-    } as WilsonTemplate;
-    clonedProps.assistant.id = assistant.id;
-    clonedPropsDefaultTemplate.assistant.id = assistant.id;
-    await writeJsonFile(newRecipeFilename, clonedPropsDefaultTemplate);
-    return clonedProps;
   }
 
   /** Create a new OpenAI Assistant. */
@@ -51,28 +31,5 @@ export class AssistantLoader {
       instructions: this.assistant.instruction,
       // tools = [],
     });
-  }
-
-  /** Sanitize a string for use in filenames. */
-  sanitizeString(inputString: string | null): string {
-    if (inputString === null) {
-      throw new Error("Input string is null");
-    }
-    return sanitizeString(inputString);
-  }
-
-  /** Debug hint for new assistant creation. */
-  debugHintNewAssistant(assistantId: string, newRecipeFilename: string): void {
-    console.log("\n\n\n");
-    console.log("Created Assistant with Id: " + assistantId);
-    console.log("\n\n\n");
-    console.log(
-      "writing new recipe file with assistant id:\n" + newRecipeFilename,
-    );
-    console.log("\n\n");
-    console.log(
-      "Manage your assistants at https://platform.openai.com/assistants/",
-    );
-    console.log("\n\n\n-----------------------------------\n\n\n");
   }
 }
