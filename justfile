@@ -17,7 +17,7 @@ clean-assistant-files:
 
 vhs-record:
 	@just compile
-	@vhs demo.tape
+	@VHS_RECORDING=true vhs demo.tape
 
 compile:
 	@deno compile --allow-run --allow-net --allow-env --allow-read --allow-write --output dist/wilson main.jsx

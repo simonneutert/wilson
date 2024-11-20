@@ -9,7 +9,7 @@
       "Can you break the problem into smaller parts?",
       "When testing my implementation what should I focus on?",
       "Can you think of pitfalls or misunderstandings? Help me navigate the problem.",
-      "Remind me to edit the recipe stored in `assistants/replays/IT Tech Lead` and run again with more details."
+      "Write a short info for me, reminding me that this tool has a replay function, that lets me edit a previous/this recipe stored in `assistants/replays/IT Tech Lead` and run it again with the added info."
     ]
   },
   "recipe": [

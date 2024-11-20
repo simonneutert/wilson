@@ -35,9 +35,10 @@ responsibility. 🕷️🦸
   - [Create a new Assistant by copying from a template](#create-a-new-assistant-by-copying-from-a-template)
 - [Template Assistants](#template-assistants)
 - [Use your created Assistants](#use-your-created-assistants)
+- [Write AI answers to a file?](#write-ai-answers-to-a-file)
 - [Ideas/Todos/Wishlist](#ideastodoswishlist)
-  - [Developer README](#developer-readme)
-  - [Contributions](#contributions)
+- [Developer README](#developer-readme)
+- [Contributions](#contributions)
 - [Legal Disclaimer](#legal-disclaimer)
 
 ---
@@ -326,6 +327,15 @@ Made with [Deno](https://deno.com/) 🦕,
 [OpenAI's Client for Deno](https://github.com/openai/openai-deno-build) 🤖 this
 little code dump is more of a playground to get the hang of Deno and Ink.
 
+## Write AI answers to a file?
+
+It is possible to write the AI answers to a file. Take this as an inspiration.
+
+```bash
+output=$(./dist/wilson-replay assistants/replays/Consultant\ Wizard/asst_12345abcdef/replay_consultant_wizard_1732099658202.json);
+echo $output > answer.txt
+```
+
 ## Ideas/Todos/Wishlist
 
 - [ ] write a Dockerfile Readme about how to run the project in a container
@@ -341,16 +351,16 @@ little code dump is more of a playground to get the hang of Deno and Ink.
 
 ---
 
-Wilson - The Game?
+Wilson - As a Game?
 
 - [ ] [prompts](https://github.com/terkelg/prompts)
 - [ ] read a bit more about [inkjs](https://github.com/y-lohse/inkjs)
 
-### Developer README
+## Developer README
 
 See the [Developer README](./README.DEVELOPER.md) for more information.
 
-### Contributions
+## Contributions
 
 Let's discuss first! 🤓
 
